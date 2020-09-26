@@ -7,6 +7,8 @@ services:
         ports:
             - 5672:5672
             - 8090:15672
+        volumes:
+            - "/media/079f82b8-0876-4348-b6b1-60ba89fd1556/PiBook/docker_volumes/rabbit:/var/lib/rabbitmq"
         networks:
             - net
 
