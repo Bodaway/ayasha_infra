@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+    messenger:
+        image: "rabbitmq:3.8.7-management-alpine"
+        hostname: "ayasha_rabbit"
+        ports:
+            - 5672:5672
+            - 8090:15672
+        networks:
+            - net
+
+networks:
+    net:
+      driver: overlay

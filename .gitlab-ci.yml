@@ -1,0 +1,17 @@
+stages:    
+  - Build
+   
+image: docker/compose
+   
+build:
+  stage: Build
+  services:
+    - docker:19.03.12-dind
+  
+  script:
+    - if docker secret ls | grep rabbit_conn > /dev/null  ;then docker secret rm rabbit_conn ;fi;
+    - echo "$rabbit_conn" | docker secret create rabbit_conn -
+    - if docker secret ls | grep rabbit_queue > /dev/null  ;then docker secret rm rabbit_queue ;fi;
+    - echo "$rabbit_queue" | docker secret create rabbit_queue -
+    - docker-compose build
+    - docker stack deploy --compose-file docker-compose.yml Ayasha
